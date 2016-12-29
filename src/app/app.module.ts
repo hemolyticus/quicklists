@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { IntroPage } from '../pages/intro/intro';
-import { ChecklistsPage } from '../pages/checklist/checklist';
+import { ChecklistsPage } from '../pages/checklists/checklists';
 import { Data } from '../providers/data';
 
 @NgModule({

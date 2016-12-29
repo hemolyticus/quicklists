@@ -1,14 +1,65 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+
+    <ion-navbar> color="secondary">
+
+        <ion-title>
+
+            <img src="assets/images/logo.png"/>
+
+        </ion-title>
+
+        <ion-buttons end>
+
+            <button ion-button icon-only (click)="addChecklists()">
+
+                <ion-icon name="add-circle"></ion-icon>
+
+            </button>
+
+        </ion-buttons>
+
+    </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+    <ion-list no-lines>
+
+        <ion-item-sliding>
+
+            <button ion-item (click)="viewChecklist(checklist)">
+
+                TITLE GOES HERE
+
+                <span>0 items</span>
+
+            </button>
+
+            <ion-item-options>
+
+                <button ion-button icon-only color="light" (click)="renameChecklist(checklist)">
+
+                    <ion-icon name="clipboard"></ion-icon>
+
+                    Edit
+
+                </button>
+
+                <button ion-button icon-only color="danger" (click)="removeCHecklist(checklists)">
+
+                <ion-icon name="trash">
+
+                    Delete
+
+                </ion-icon>
+
+                </button>
+
+            </ion-item-options>
+
+        </ion-item-sliding>
+
+    </ion-list>
+
 </ion-content>

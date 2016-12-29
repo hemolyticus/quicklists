@@ -1,3 +1,4 @@
+import {Observable} from "rxjs/Observable";
 export class ChecklistsModel
 {
     checklist: any;
@@ -6,6 +7,12 @@ export class ChecklistsModel
     constructor (public title:string, public items: any[])
     {
         this.items=items;
+
+        this.checklist=Observable.create(observer =>
+        {
+         this.checklistObserver= observer;
+        });
+
     }
 
 
@@ -20,6 +27,9 @@ export class ChecklistsModel
                 checked: false
             }
         );
+
+        this.checklistObserver.next(true);
+
     }
 
 
@@ -33,6 +43,9 @@ export class ChecklistsModel
         {
             this.items.splice(index, 1);
         }
+
+        this.checklistObserver.next(true);
+
     }
 
 
@@ -45,17 +58,23 @@ export class ChecklistsModel
         {
             this.items[index].title= title;
         }
+
+        this.checklistObserver.next(true);
+
     }
 
 
     setTitle(title): void
     {
         this.title=title;
+        this.checklistObserver.next(true);
+
     }
 
     toggleItem(item): void{
 
         item.checked = !item.checked;
+        this.checklistObserver.next(true);
     }
 
 }

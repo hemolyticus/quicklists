@@ -24,7 +24,7 @@ export class HomePage {
 
   }
 
-  addChecklist():void
+  addChecklists():void
   {
 
       let prompt = this.alertCtrl.create
@@ -66,6 +66,34 @@ export class HomePage {
 
   renameChecklist(checklist): void
   {
+      let prompt = this.alertCtrl.create({
+          title: 'Rename Checklist',
+          message: 'Enter the new name of this checklist below',
+          inputs: [
+              {
+                  name: 'name'
+              }
+          ],
+          buttons: [
+              {
+                  text: 'Cancel'
+              },
+              {
+                  text: 'Save',
+                  handler: data =>{
+                      let index = this. checklists.indexOf(checklist);
+
+                      if ( index > -1)
+                      {
+                          this.checklists[index].setTitle(data.name);
+                          this.save();
+                      }
+                  }
+              }
+          ]
+      });
+
+      prompt.present();
 
   }
 

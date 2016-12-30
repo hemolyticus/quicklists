@@ -15,7 +15,7 @@ export class HomePage {
     checklists: ChecklistsModel[] =[];
 
     //Contructor
-  constructor(public navCtrl: NavController, public dataService: Data, public alertCtrl: AlertController, public platform: Platform) {
+  constructor(public nav: NavController, public dataService: Data, public alertCtrl: AlertController, public platform: Platform) {
     
   }
     //Methods
@@ -99,11 +99,21 @@ export class HomePage {
 
   viewChecklist(checklist): void
   {
+      this.nav.push(ChecklistsPage, {
+          checklist: checklist
+      });
 
   }
 
   removeChecklist(checklist): void
   {
+      let index = this.checklists.indexOf(checklist);
+
+      if (index >-1)
+      {
+          this.checklists.splice(index, 1);
+          this.save();
+      }
 
   }
 

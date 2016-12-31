@@ -119,6 +119,8 @@ export class HomePage {
 
   save():void
   {
+      Keyboard.close();
+      this.dataService.save(this.checklists);
 
   }
 

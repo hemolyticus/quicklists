@@ -14,13 +14,38 @@ export class HomePage {
     //Variables
     checklists: ChecklistsModel[] =[];
 
-    //Contructor
+    //Constructor
   constructor(public nav: NavController, public dataService: Data, public alertCtrl: AlertController, public platform: Platform) {
     
   }
     //Methods
   ionViewDidLoad()
   {
+      this.platform.ready().then(() => {
+          this.dataService.getData().then((checklists) =>{
+
+              let savedChecklists: any = false;
+
+              if (typeof(checklists) != "undefined")
+              {
+                  savedChecklists = JSON.parse(checklists);
+              }
+
+              if (savedChecklists)
+              {
+                  savedChecklists.forEach((savedChecklists) =>
+                  {
+                    let loadChecklist = new ChecklistsModel(savedChecklists.title, savedChecklists.items);
+                    this.checklists.push(loadChecklist);
+
+                    loadChecklist.checklist.subscribe(update =>
+                    {
+                        this.save();
+                    });
+                  });
+              }
+          });
+      });
 
   }
 

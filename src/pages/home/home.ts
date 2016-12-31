@@ -4,6 +4,8 @@ import { ChecklistsPage } from '../checklists/checklists';
 import { ChecklistsModel } from '../../models/checklists-model';
 import { Data } from '../../providers/data';
 import { Keyboard } from 'ionic-native';
+import { IntroPage } from '../intro/intro';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -15,13 +17,24 @@ export class HomePage {
     checklists: ChecklistsModel[] =[];
 
     //Constructor
-  constructor(public nav: NavController, public dataService: Data, public alertCtrl: AlertController, public platform: Platform) {
+  constructor(public nav: NavController, public dataService: Data,
+              public alertCtrl: AlertController, public storage: Storage, public platform: Platform) {
     
   }
     //Methods
   ionViewDidLoad()
   {
       this.platform.ready().then(() => {
+
+          this.storage.get('introShown'). then((result) => {
+
+              if (!result)
+              {
+                  this.storage.set('introShown', true);
+                  this.nav.setRoot(IntroPage);
+              }
+          });
+
           this.dataService.getData().then((checklists) =>{
 
               let savedChecklists: any = false;

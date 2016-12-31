@@ -22,17 +22,18 @@
 
 </ion-header>
 
+
 <ion-content>
 
     <ion-list no-lines>
 
         <ion-item-sliding *ngFor="let checklist of checklists">
 
-            <button ion-item (click)="viewChecklist(checklist)">
+            <button ion-item (click)="viewChecklist(checklist)" class="home-item">
 
                 {{checklist.title}}
 
-                <span>{{checklist.items.length}} items</span>
+                <span class="secondary-detail">{{checklist.items.length}} items</span>
 
             </button>
 

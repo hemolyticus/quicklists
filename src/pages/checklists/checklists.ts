@@ -54,19 +54,40 @@ export class ChecklistsPage {
 
   toggleItem(item): void
   {
-
+    this.checklist.toggleItem(item);
 
   }
 
   removeItem(item): void
   {
+      this.checklist.renameItem(item);
 
   }
 
   renameItem(item):void
   {
 
-
+      let prompt = this.alertCtrl.create({
+          title: 'Rename Item',
+          message: 'Enter the new name  of the task for this checklists below:',
+          inputs: [
+              {
+                  name: 'name'
+              }
+          ],
+          buttons: [
+              {
+                  text: 'Cancel'
+              },
+              {
+                  text: 'Save',
+                  handler: data =>{
+                      this.checklist.renameItem(item, data._name)
+                  }
+              }
+          ]
+      });
+      prompt.present();
   }
 
 

@@ -94,6 +94,12 @@ export class ChecklistsPage {
   uncheckItems():void
   {
 
+      this.checklist.items.forEach((item)=> {
+          if (item.checked){
+              this.checklist.toggleItem(item);
+          }
+      });
+
   }
 
 

@@ -1,6 +1,6 @@
+import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+
 
 /*
   Generated class for the Data provider.
@@ -11,8 +11,35 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Data {
 
-  constructor(public http: Http) {
-    console.log('Hello Data Provider');
+    //Constructor
+  constructor(public storage: Storage)
+  {
+
+  }
+
+    //Functions
+  getData(): Promise<any>
+  {
+      return this.storage.get('checklists');
+  }
+
+  save(data): void
+  {
+      //local variable
+      let saveData =[];
+
+
+      //Remove observables
+      data.forEach((checklist) => {
+          saveData.push({
+              title: checklist.title,
+              items: checklist.items
+          });
+      });
+
+      let newData = JSON.stringify(saveData);
+      this.storage.set('checklists', newData);
+
   }
 
 }
